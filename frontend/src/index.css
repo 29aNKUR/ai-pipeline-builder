@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #11111b;
+  color: #cdd6f4;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ReactFlow overrides */
+.react-flow__edge-path {
+  stroke: #6366f1;
+  stroke-width: 2;
+}
+
+.react-flow__connection-line {
+  stroke: #89b4fa;
+  stroke-width: 2;
+}
+
+.react-flow__controls button {
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  color: #cdd6f4;
+  fill: #cdd6f4;
+}
+
+.react-flow__controls button:hover {
+  background: #313244;
+}
+
+.react-flow__minimap {
+  background: #181825 !important;
+  border: 1px solid #313244;
+  border-radius: 8px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #1e1e2e; }
+::-webkit-scrollbar-thumb { background: #45475a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #585b70; }
+
+/* Input/select global focus */
+input:focus, select:focus, textarea:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
+}
