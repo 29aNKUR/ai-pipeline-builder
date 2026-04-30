@@ -11,14 +11,14 @@ export const SubmitButton = () => {
 
   const handleSubmit = async () => {
     try {
-      const params = new URLSearchParams();
-      params.append("nodes", JSON.stringify(nodes));
-      params.append("edges", JSON.stringify(edges));
-
       const response = await fetch(
-        `http://localhost:8000/pipelines/parse?${params.toString()}`,
+        `https://ai-pipeline-builder-production.up.railway.app/pipelines/parse`,
         {
-          method: "GET",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ nodes, edges }),
         },
       );
 
