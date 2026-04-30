@@ -1,6 +1,11 @@
 import { useStore } from "./store";
 import { useShallow } from "zustand/react/shallow";
 
+const selector = (state) => ({
+  nodes: state.nodes,
+  edges: state.edges,
+});
+
 export const SubmitButton = () => {
   const { nodes, edges } = useStore(useShallow(selector));
 
