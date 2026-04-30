@@ -8,16 +8,11 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://ai-pipeline-builder-v9c4.vercel.app",
-        "http://localhost:3000",
-        "http://localhost:5173",
-    ],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,  # must be False when using wildcard
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 @app.get('/')
 def read_root():
     return {'Ping': 'Pong'}
