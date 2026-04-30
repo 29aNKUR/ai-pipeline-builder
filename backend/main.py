@@ -8,8 +8,13 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,  # must be False when using wildcard
+    allow_origins=[
+        "https://ai-pipeline-builder.vercel.app",
+        "https://ai-pipeline-builder-v9c4.vercel.app",
+        "http://localhost:3000",
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
