@@ -9,13 +9,12 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://ai-pipeline-builder-v9c4.vercel.app",
         "http://localhost:3000",
-        "http://localhost:3001",
-        "http://localhost:3002",
-        "https://ai-pipeline-builder.vercel.app",
+        "http://localhost:5173",
     ],
     allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
