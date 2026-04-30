@@ -2,21 +2,28 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
 import json
+from pydantic import BaseModel
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
-    allow_methods=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "http://localhost:3002",
+        "https://ai-pipeline-builder.vercel.app",
+    ],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
-
 
 @app.get('/')
 def read_root():
     return {'Ping': 'Pong'}
+
+
 
 
 def is_dag(nodes: list, edges: list) -> bool:
@@ -48,23 +55,15 @@ def is_dag(nodes: list, edges: list) -> bool:
 
     return True
 
+class Pipeline(BaseModel):
+    nodes: list = []
+    edges: list = []
 
-@app.get('/pipelines/parse')
-def parse_pipeline(nodes: Optional[str] = None, edges: Optional[str] = None):
-    parsed_nodes = []
-    parsed_edges = []
-
-    try:
-        if nodes:
-            parsed_nodes = json.loads(nodes)
-        if edges:
-            parsed_edges = json.loads(edges)
-    except json.JSONDecodeError:
-        return {'error': 'Invalid JSON', 'num_nodes': 0, 'num_edges': 0, 'is_dag': False}
-
-    num_nodes = len(parsed_nodes)
-    num_edges = len(parsed_edges)
-    dag = is_dag(parsed_nodes, parsed_edges)
+@app.post('/pipelines/parse')
+def parse_pipeline(pipeline: Pipeline):
+    num_nodes = len(pipeline.nodes)
+    num_edges = len(pipeline.edges)
+    dag = is_dag(pipeline.nodes, pipeline.edges)
 
     return {
         'num_nodes': num_nodes,
